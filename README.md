@@ -11,3 +11,4 @@
 
 docker ps -a
 docker exec -it 2f4d9cb4198e /bin/bash
+test
