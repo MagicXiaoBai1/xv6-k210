@@ -1,6 +1,7 @@
 #!/bin/sh
 
 tests="
+exit
 brk
 chdir
 clone
@@ -8,7 +9,7 @@ close
 dup2
 dup
 execve
-exit
+
 fork
 fstat
 getcwd

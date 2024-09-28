@@ -38,7 +38,7 @@ OBJS += \
   $K/disk.o \
   $K/fat32.o \
   $K/plic.o \
-  $K/console.o
+  $K/console.o \
 
 ifeq ($(platform), k210)
 OBJS += \
@@ -53,7 +53,7 @@ OBJS += \
 else
 OBJS += \
   $K/virtio_disk.o \
-  #$K/uart.o \
+  $K/uart.o \
 
 endif
 
@@ -128,7 +128,7 @@ k210-serialport := /dev/ttyUSB0
 ifndef CPUS
 CPUS := 2
 endif
-
+CPUS := 1
 QEMUOPTS = -machine virt -kernel $T/kernel -m 32M -nographic
 
 # use multi-core 
@@ -233,6 +233,7 @@ fs: $(UPROGS)
 	@for file in $$( ls $U/_* ); do \
 		cp $$file $(dst)/$${file#$U/_};\
 		cp $$file $(dst)/bin/$${file#$U/_}; done
+	@cp -r riscv64 $(dst)
 	@umount $(dst)
 
 # Write mounted sdcard

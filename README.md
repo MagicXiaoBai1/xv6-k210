@@ -1,6 +1,5 @@
  sudo docker run -ti --rm -v /home/ubuntu/try_for_love/xv6-k210:/xv6 --privileged=true docker.educg.net/cg/os-contest:2024p6 /bin/bash
 
-sudo docker run -ti --rm -v /home/ubuntu/try_for_love/testsuits-for-oskernel/riscv-syscalls-testing:/testing --privileged=true docker.educg.net/cg/os-contest:2024p6 /bin/bash
 
  # wend
  https://oyer359xyx.feishu.cn/docx/SGDNdxCkuoMSV6xUgX5cPJCTnMe

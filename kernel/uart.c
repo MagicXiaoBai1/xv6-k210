@@ -10,6 +10,7 @@
 #include "include/spinlock.h"
 #include "include/proc.h"
 #include "include/intr.h"
+#include "include/defs.h"
 
 // the UART control registers are memory-mapped
 // at address UART0. this macro returns the
@@ -75,7 +76,7 @@ uartinit(void)
   // enable transmit and receive interrupts.
   WriteReg(IER, IER_TX_ENABLE | IER_RX_ENABLE);
 
-    uart_tx_w = uart_tx_r = 0;
+  //  uart_tx_w = uart_tx_r = 0;
 
   initlock(&uart_tx_lock, "uart");
 }
@@ -195,3 +196,4 @@ uartintr(void)
   uartstart();
   release(&uart_tx_lock);
 }
+

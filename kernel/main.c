@@ -35,6 +35,8 @@ main(unsigned long hartid, unsigned long dtb_pa)
   
   if (hartid == 0) {
     consoleinit();
+    printf("consoleinit done\n");
+
     printfinit();   // init a lock for printf 
     print_logo();
     #ifdef DEBUG
@@ -45,14 +47,22 @@ main(unsigned long hartid, unsigned long dtb_pa)
     kvminithart();   // turn on paging
     timerinit();     // init a lock for timer
     trapinithart();  // install kernel trap vector, including interrupt handler
+    printf("trapinithart done\n");
     procinit();
+    printf("procinit done\n");
     plicinit();
+    printf("plicinit done\n");
     plicinithart();
+    printf("plicinithart done\n");
     #ifndef QEMU
     fpioa_pin_init();
+    printf("fpioa_pin_init done\n");
     dmac_init();
+    printf("dmac_init done\n");
     #endif 
     disk_init();
+    printf("disk_init done\n");
+    
     binit();         // buffer cache
     fileinit();      // file table
     userinit();      // first user process

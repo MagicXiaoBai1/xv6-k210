@@ -20,6 +20,7 @@
 #include "include/riscv.h"
 #include "include/proc.h"
 #include "include/sbi.h"
+#include "include/defs.h"
 
 #define BACKSPACE 0x100
 #define C(x)  ((x)-'@')  // Control-x
@@ -180,11 +181,18 @@ void
 consoleinit(void)
 {
   initlock(&cons.lock, "cons");
+  
 
   cons.e = cons.w = cons.r = 0;
+
+  uartinit();
+  printf("uartinit done\n");
   
   // connect read and write system calls
   // to consoleread and consolewrite.
   devsw[CONSOLE].read = consoleread;
   devsw[CONSOLE].write = consolewrite;
+
+  
+  
 }

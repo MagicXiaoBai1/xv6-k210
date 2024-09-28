@@ -27,9 +27,15 @@ plicinithart(void)
   int hart = cpuid();
   #ifdef QEMU
   // set uart's enable bit for this hart's S-mode. 
+  printf("plicinithart_in\n ");
+
   *(uint32*)PLIC_SENABLE(hart)= (1 << UART_IRQ) | (1 << DISK_IRQ);
+  printf("plicinithart_in\n ");
+  
   // set this hart's S-mode priority threshold to 0.
   *(uint32*)PLIC_SPRIORITY(hart) = 0;
+  printf("plicinithart_in\n ");
+  
   #else
   uint32 *hart_m_enable = (uint32*)PLIC_MENABLE(hart);
   *(hart_m_enable) = readd(hart_m_enable) | (1 << DISK_IRQ);

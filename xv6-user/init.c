@@ -23,12 +23,17 @@ main(void)
 
   for(;;){
     printf("init: starting sh\n");
+    printf("init:LALALALA sh\n");
+
     pid = fork();
     if(pid < 0){
       printf("init: fork failed\n");
       exit(1);
     }
     if(pid == 0){
+      //char *argv[] = { "sh", 0 };
+      //exec("sh", argv);
+      
       exec("sh", argv);
       printf("init: exec sh failed\n");
       exit(1);

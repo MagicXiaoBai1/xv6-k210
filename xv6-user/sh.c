@@ -260,6 +260,7 @@ getcmd(char *buf, int nbuf)
 int
 main(void)
 {
+  // printf("welcome to xv6 shell!");
   static char buf[100];
   int fd;
 
