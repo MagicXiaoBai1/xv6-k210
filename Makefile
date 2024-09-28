@@ -53,7 +53,7 @@ OBJS += \
 else
 OBJS += \
   $K/virtio_disk.o \
-  $K/uart.o \
+#  $K/uart.o \
 
 endif
 

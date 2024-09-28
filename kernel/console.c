@@ -185,14 +185,12 @@ consoleinit(void)
 
   cons.e = cons.w = cons.r = 0;
 
-  uartinit();
   printf("uartinit done\n");
   
   // connect read and write system calls
   // to consoleread and consolewrite.
   devsw[CONSOLE].read = consoleread;
   devsw[CONSOLE].write = consolewrite;
-
-  
   
 }
+

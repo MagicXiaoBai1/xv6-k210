@@ -20,6 +20,8 @@
 #include "include/sdcard.h"
 #include "include/fpioa.h"
 #include "include/dmac.h"
+
+
 #endif
 
 static inline void inithartid(unsigned long hartid) {

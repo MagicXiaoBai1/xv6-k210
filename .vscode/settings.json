@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "sbi.h": "c",
-        "sleeplock.h": "c"
+        "sleeplock.h": "c",
+        "sdcard.h": "c"
     }
 }
