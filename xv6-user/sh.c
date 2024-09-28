@@ -258,6 +258,32 @@ getcmd(char *buf, int nbuf)
 }
 
 int
+getcmd_HYF(char *buf, int nbuf, int i_commend)
+{
+  //声明一个包含三个字符串的数组
+  
+  char *commend_list[] = {
+    "ls",
+    //"cd riscv64",
+    "./riscv64/exit",
+    //"sh run-all.sh",
+  };
+  if(i_commend >= sizeof(commend_list) / sizeof(char*)){
+    return -1;
+  }
+  char *now_commend = commend_list[i_commend];
+  int now_commend_len = strlen(now_commend);
+  for(int i=0; i<now_commend_len; i++){
+    buf[i] = now_commend[i];
+  }
+  fprintf(2, "-> %s $ ", mycwd);
+  fprintf(2, "%s \n", now_commend);
+  if(buf[0] == 0) // EOF
+    return -1;
+  return 0;
+}
+
+int
 main(void)
 {
   // printf("welcome to xv6 shell!");
@@ -279,7 +305,15 @@ main(void)
 
   getcwd(mycwd);
   // Read and run input commands.
-  while(getcmd(buf, sizeof(buf)) >= 0){
+  int i_commend = 0;
+  while (1)
+  {
+    int flag_end = getcmd_HYF(buf, sizeof(buf), i_commend);
+    ++i_commend;
+    if(flag_end == -1)
+    {
+      getcmd(buf, sizeof(buf));
+    }
     replace(buf);
     if(buf[0] == 'c' && buf[1] == 'd' && buf[2] == ' '){
       // Chdir must be called by the parent, not the child.
