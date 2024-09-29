@@ -189,9 +189,47 @@ syscall(void)
       printf("pid %d: %s -> %d\n", p->pid, sysnames[num], p->trapframe->a0);
     }
   } else {
-    printf("pid %d %s: unknown sys call %d\n",
+    // printf("pid %d %s: unknown sys call %d\n",
+    //         p->pid, p->name, num);
+    // printf("try to align with ready-made:   ");
+    _Bool align_flag = 0;
+    // 映射表 = 0[映射]n
+    // 映射 = 未实现调用 + 已实现调用
+    int align_mapping_table[][2] = {
+      {64,16},
+      {93,2},
+      {220,1},
+      {260,3},
+    };
+    int new_num = -1;
+    for(int i = 0;i<sizeof(align_mapping_table)/sizeof(align_mapping_table[0]);i++){
+      if(align_mapping_table[i][0] == num){
+        align_flag = 1;
+        new_num = align_mapping_table[i][1];
+        break;
+      }
+    }
+    if (align_flag){
+      if (new_num == 3){
+        p->trapframe->a0 = p->trapframe->a1;
+      }
+      // 可以对齐，改为执行已实现的系统调用
+      // printf("OK: %d -> %d\n",num,new_num);
+      p->trapframe->a0 = syscalls[new_num]();
+      printf("pid %d: %s -> %d\n", p->pid, sysnames[new_num], p->trapframe->a0);
+      // trace
+      if ((p->tmask & (1 << new_num)) != 0) {
+        printf("pid %d: %s -> %d\n", p->pid, sysnames[new_num], p->trapframe->a0);
+      }
+    } else{
+      printf("bad\n");
+      // 不能对其齐，返回错误
+      printf("pid %d %s: True need done(for love) sys call %d\n",
             p->pid, p->name, num);
-    p->trapframe->a0 = -1;
+      p->trapframe->a0 = -1;
+      
+      
+    }
   }
 }
 
