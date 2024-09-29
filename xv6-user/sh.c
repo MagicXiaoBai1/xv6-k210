@@ -3,6 +3,7 @@
 #include "kernel/include/types.h"
 #include "xv6-user/user.h"
 #include "kernel/include/fcntl.h"
+#include "xv6-user/sh_commend_list.h"
 
 // Parsed command representation
 #define EXEC  1
@@ -256,18 +257,13 @@ getcmd(char *buf, int nbuf)
     return -1;
   return 0;
 }
+extern char *commend_list[];
 
 int
 getcmd_HYF(char *buf, int nbuf, int i_commend)
 {
   //声明一个包含三个字符串的数组
   
-  char *commend_list[] = {
-    "ls",
-    //"cd riscv64",
-    "./riscv64/exit",
-    //"sh run-all.sh",
-  };
   if(i_commend >= sizeof(commend_list) / sizeof(char*)){
     return -1;
   }
