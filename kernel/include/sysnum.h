@@ -29,4 +29,8 @@
 #define SYS_getcwd      25
 #define SYS_rename      26
 
+#define SYS_getppid     173
+
+
+
 #endif
