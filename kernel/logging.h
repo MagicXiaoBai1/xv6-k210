@@ -13,7 +13,7 @@ char* log_pre(char*);
 void log_none(char *fmt, ...);
 
 // 定义 print_log 宏
-#define log_on 0
+#define log_on 1
 #if (log_on > 0)
 #define print_log_full(fmt, ...) printf(log_pre(fmt), __FILE__, __LINE__, ##__VA_ARGS__)
 #define print_log_add(fmt, ...) printf(fmt, ##__VA_ARGS__)
