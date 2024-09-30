@@ -39,6 +39,7 @@ OBJS += \
   $K/fat32.o \
   $K/plic.o \
   $K/console.o \
+  $K/logging.o \
 
 ifeq ($(platform), k210)
 OBJS += \

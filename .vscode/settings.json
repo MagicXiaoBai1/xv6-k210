@@ -7,6 +7,15 @@
         "sysinfo.h": "c",
         "sysnum.h": "c",
         "types.h": "c",
-        "fcntl.h": "c"
+        "fcntl.h": "c",
+        "logging.h": "c",
+        "defs.h": "c",
+        "stdarg.h": "c",
+        "stdio.h": "c",
+        "printf.h": "c",
+        "riscv.h": "c",
+        "param.h": "c",
+        "console.h": "c",
+        "proc.h": "c"
     }
 }
